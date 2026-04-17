@@ -24,20 +24,8 @@ def calculate_semantic_similarity(A):
 
 def calculate_functional_similarity(A, DS, axis):
 
-    if axis == 1:  # 计算药物功能相似性
-        num_drugs = A.shape[0]
-        FR = np.zeros((num_drugs, num_drugs))
-        for i in range(num_drugs):
-            d_i1 = np.where(A[i, :] > 0)[0]
-            for j in range(num_drugs):
-                d_j2 = np.where(A[j, :] > 0)[0]
-                max_DE = np.zeros((len(d_i1), len(d_j2)))
-                for k in range(len(d_i1)):
-                    for l in range(len(d_j2)):
-                        max_DE[k, l] = DS[d_i1[k], d_j2[l]]
-                FR[i, j] = (np.max(max_DE, axis=1).sum() + np.max(max_DE, axis=0).sum()) / (len(d_i1) + len(d_j2))
-        return FR
-    else:  # 计算微生物功能相似性
+
+     # 计算微生物功能相似性
         num_microbes = A.shape[0]
         FM = np.zeros((num_microbes, num_microbes))
         for i in range(num_microbes):
